@@ -26,7 +26,7 @@ function Login() {
         setState({ ...state, [e.target.name]: e.target.value });
     }
 
-    const { loading, error, data, refetch } = useQuery(LOGIN_QUERY, {
+    const { loading, error, refetch } = useQuery(LOGIN_QUERY, {
         variables: { email: "", password: "" },
         skip: true, // Initially, skip the query
     });

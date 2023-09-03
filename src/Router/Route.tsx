@@ -6,7 +6,7 @@ import Register from '../components/Register'
 import NavScrollExample from '../components/NavbarScrolleExample'
 import {Footer} from "../components/Footer"
 import First from '../components/First'
-import Product from '@/components/Product'
+import Product from '../components/Product'
 const Routers: React.FC = () => {
   return (
     <>

@@ -1,21 +1,10 @@
 import React from "react";
-import { useQuery, gql } from "@apollo/client";
+import  {useUserQuery}  from "../hook/query/user";
 
-const FILMS_QUERY = gql`
-query Query {
-    getAllUser {
-      id
-      firstName
-      lastName
-      email
-      password
-    }
-  }
-`;
 
 export default function First() {
-  const { loading, error, data} = useQuery(FILMS_QUERY);
-  console.log(data,"data");
+  const { loading, error, data} = useUserQuery();
+
 
   if (loading) return "Loading...";
   if (error) return <pre>{error.message}</pre>
