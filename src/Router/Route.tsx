@@ -7,17 +7,21 @@ import NavScrollExample from '../components/NavbarScrolleExample'
 import {Footer} from "../components/Footer"
 import First from '../components/First'
 import Product from '../components/Product'
+import Protected from "../components/Protected"
 const Routers: React.FC = () => {
   return (
     <>
 <BrowserRouter>
 <NavScrollExample />
 <Routes>
+    <Route element={<Protected/>}>
+    <Route path="/product" element={<Product/>}/>
 
+    </Route>
     <Route path="/" element={<First/>}/>
     <Route path="/login" element={<Login/>}/>
     <Route path="/register" element={<Register/>}/>
-    <Route path="/product" element={<Product/>}/>
+    
     
 </Routes>
 <Footer></Footer>

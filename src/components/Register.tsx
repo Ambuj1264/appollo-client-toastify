@@ -74,21 +74,24 @@ export default function Register() {
 
   const submitData = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    setFirstNameError("");
+    setLastNameError("");
+    setEmailError("");
+    setPasswordError("");
     const { email, password, firstName, lastName } = state;
 
     if (!(email && password && firstName && lastName)) {
       if (!firstName) {
-        setFirstNameError("First Name is required");
+      return   setFirstNameError("First Name is required");
       }
       if (!lastName) {
-        setLastNameError("Last Name is required");
+        return   setLastNameError("Last Name is required");
       }
       if (!email) {
-        setEmailError("Email is required");
+        return   setEmailError("Email is required");
       }
       if (!password) {
-        setPasswordError("Password is required");
+        return      setPasswordError("Password is required");
       }
     } else {
       try {
@@ -103,12 +106,12 @@ export default function Register() {
 
         if (result.data) {
           displayToast("🦄 Registration successful!", "success");
-          setTimeout(() => navigate("/login"), 5100);
+          navigate("/login");
         } else {
-          displayToast("🦄 Something went wrong!", "error");
+          displayToast(`🦄  Something went wrong!`, "error");
         }
-      } catch (error) {
-        displayToast("🦄 Something went wrong!", "error");
+      } catch (error: any) {
+        displayToast("🦄 Something went wrong! ", "error");
       }
     }
   };
@@ -154,7 +157,7 @@ export default function Register() {
         <TextField
           id="outlined-basic"
           name="firstName"
-          value={state.firstName}
+          value={state?.firstName}
           label="First Name"
           variant="outlined"
           onChange={handleInputChange}
@@ -165,7 +168,7 @@ export default function Register() {
           id="outlined-basic"
           name="lastName"
           label="Last Name"
-          value={state.lastName}
+          value={state?.lastName}
           variant="outlined"
           onChange={handleInputChange}
           required
@@ -175,7 +178,7 @@ export default function Register() {
           id="outlined-basic"
           name="email"
           label="Email"
-          value={state.email}
+          value={state?.email?.toLowerCase()}
           variant="outlined"
           onChange={handleInputChange}
           required

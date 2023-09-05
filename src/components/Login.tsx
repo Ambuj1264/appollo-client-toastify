@@ -3,14 +3,19 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useQuery, gql } from "@apollo/client";
 
 const LOGIN_QUERY = gql`
-  query LoginQuery($email: String!, $password: String!) {
-    loginUser(email: $email, password: $password) {
-      id
-      firstName
-      lastName
-      email
-    }
+query Query($email: String!, $password: String!) {
+
+loginUser(email: $email, password: $password) {
+  token
+  findMyUser {
+    id
+    firstName
+    lastName
+    email
+    password
   }
+}
+}
 `;
 
 function Login() {
@@ -57,13 +62,16 @@ function Login() {
             if (loading) return <p>Loading...</p>;
             if (error) return <pre>{error.message}</pre>;
 
-            const user = data ? data.loginUser : null;
+            const user = data ? data.loginUser.findMyUser : null;
             console.log(user);
 
             // Implement the logic for handling the query result here
             if (user) {
                 localStorage.setItem("email", user.email);
+                localStorage.setItem("token",data.loginUser.token);
+             if(data.loginUser.token){
                 navigate("/product");
+             }
             } else {
                 alert("Try Again with correct credentials");
             }
